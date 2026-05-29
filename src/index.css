@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--bg-color);
+  --color-surface: var(--surface-color);
+  --color-primary: #10B981;
+  --color-secondary: #6366F1;
+  --color-accent: #F59E0B;
+  --color-main: var(--text-main);
+  --font-outfit: "Outfit", sans-serif;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --surface-color: rgba(255, 255, 255, 0.95);
+  --text-main: #000000;
+  --text-secondary: #4b5563;
+  --text-placeholder: rgba(0, 0, 0, 0.45);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --key-bg: rgba(255, 255, 255, 0.9);
+  --key-active: rgba(0, 0, 0, 0.05);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.dark {
+  --bg-color: #050505;
+  --surface-color: #0f0f0f;
+  --text-main: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-placeholder: rgba(255, 255, 255, 0.3);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.8);
+  --key-bg: rgba(255, 255, 255, 0.05);
+  --key-active: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-background font-outfit antialiased selection:bg-primary/30 relative min-h-screen overflow-x-hidden;
+    color: var(--text-main);
+    padding-top: calc(4rem + var(--safe-area-top));
+    padding-bottom: var(--safe-area-bottom);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@utility glass-card {
+  @apply backdrop-blur-3xl border rounded-[2.5rem];
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+  box-shadow: 0 25px 50px -12px var(--shadow-color);
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@utility input-zen {
+  @apply w-full bg-transparent border-none font-black focus:outline-none tracking-tighter cursor-default;
+  color: var(--text-main);
+  transition: opacity 300ms ease;
+}
+
+.input-zen::placeholder {
+  color: var(--text-placeholder);
+  opacity: 1;
+}
+
+@utility label-zen {
+  @apply text-[9px] font-black uppercase tracking-[0.4em] opacity-70 mb-3 block;
+}
+
+@utility key-cap {
+  @apply h-14 flex items-center justify-center rounded-2xl text-lg font-black border border-transparent;
+  background-color: var(--key-bg);
+  transition: transform 150ms ease, background-color 150ms ease;
+  will-change: transform;
+}
+
+.key-cap:active {
+  background-color: var(--key-active);
+  border-color: var(--border-color);
+}
+
+/* Hide Scrollbar */
+@utility no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@utility safe-top {
+  padding-top: var(--safe-area-top);
+}
+
+@utility safe-bottom {
+  padding-bottom: var(--safe-area-bottom);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full;
+}
+
+@utility glass-border {
+  border: 1px solid var(--border-color);
+}
+
+/* SEO & Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
